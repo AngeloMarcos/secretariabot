@@ -2,27 +2,28 @@
   "name": "secretariabot-backend",
   "version": "1.0.0",
   "description": "Backend NestJS do SecretariaBot",
-  "scripts": {
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\""
-  },
+ "scripts": {
+  "start": "nest start",
+  "start:dev": "nest start --watch",
+  "start:prod": "node dist/main.js",
+  "build": "nest build"
+},
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^10.0.0",
+    "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "typeorm": "^0.3.17",
-    "pg": "^8.9.0"
+    "typeorm": "^0.3.17"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
-    "typescript": "^5.0.0",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "typescript": "^5.0.0"
   }
 }

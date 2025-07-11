@@ -9,25 +9,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const config_1 = require("@nestjs/config");
 const user_entity_1 = require("./user/user.entity");
 const user_module_1 = require("./user/user.module");
+const client_entity_1 = require("./client/client.entity");
+const client_module_1 = require("./client/client.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: 'db',
-                port: 5432,
-                username: 'postgres',
-                password: 'postgres',
-                database: 'secretariabot',
-                entities: [user_entity_1.User],
-                synchronize: true,
+            config_1.ConfigModule.forRoot({ isGlobal: true }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                useFactory: () => ({
+                    type: 'postgres',
+                    host: process.env.DB_HOST,
+                    port: parseInt(process.env.DB_PORT || '5432', 10),
+                    username: process.env.DB_USERNAME,
+                    password: process.env.DB_PASSWORD,
+                    database: process.env.DB_NAME,
+                    entities: [user_entity_1.User, client_entity_1.Client],
+                    synchronize: true,
+                }),
             }),
             user_module_1.UserModule,
+            client_module_1.ClientModule,
         ],
     })
 ], AppModule);
